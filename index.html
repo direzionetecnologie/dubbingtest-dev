@@ -109,7 +109,7 @@ Promemoria per la configurazione di Formsubmit
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: clamp(0.85rem, 2vh, 1.35rem);
+      gap: clamp(0.7rem, 1.8vh, 1.15rem);
       padding-inline: clamp(0.25rem, 2vw, 1rem);
     }
 
@@ -127,6 +127,13 @@ Promemoria per la configurazione di Formsubmit
     .welcome button {
       margin-top: 0;
       align-self: center;
+    }
+
+    .welcome .start-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(0.45rem, 1.2vh, 0.75rem);
     }
 
     .welcome .status {
@@ -296,22 +303,18 @@ Promemoria per la configurazione di Formsubmit
       transition: background 0.2s ease, color 0.2s ease;
     }
 
-    .toggle-icon::before,
-    .toggle-icon::after {
+    .toggle-icon::before {
       content: '';
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 14px;
-      height: 2px;
-      border-radius: 999px;
-      background: currentColor;
-      transform: translate(-50%, -50%);
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .toggle-icon::after {
-      transform: translate(-50%, -50%) rotate(90deg);
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 0 6px 10px;
+      border-color: transparent transparent transparent currentColor;
+      transform: translate(-45%, -50%) rotate(0deg);
+      transition: transform 0.2s ease;
     }
 
     .overview-wrapper[data-open="true"] .overview-master-toggle .toggle-icon {
@@ -319,9 +322,8 @@ Promemoria per la configurazione di Formsubmit
       color: #e0f7ff;
     }
 
-    .overview-wrapper[data-open="true"] .overview-master-toggle .toggle-icon::after {
-      opacity: 0;
-      transform: translate(-50%, -50%) rotate(90deg) scaleX(0.2);
+    .overview-wrapper[data-open="true"] .overview-master-toggle .toggle-icon::before {
+      transform: translate(-45%, -50%) rotate(90deg);
     }
 
     .overview-section[data-open="true"] .toggle-icon {
@@ -329,9 +331,8 @@ Promemoria per la configurazione di Formsubmit
       color: #e0f7ff;
     }
 
-    .overview-section[data-open="true"] .toggle-icon::after {
-      opacity: 0;
-      transform: translate(-50%, -50%) rotate(90deg) scaleX(0.2);
+    .overview-section[data-open="true"] .toggle-icon::before {
+      transform: translate(-45%, -50%) rotate(90deg);
     }
 
     .overview-panel {
@@ -1336,10 +1337,12 @@ Promemoria per la configurazione di Formsubmit
             <h1 id="welcome-title">${escapeHtml(state.config.SURVEY_TITLE)}</h1>
             <p>Benvenuto! <br> Stiamo conducendo un blind test su brevi clip doppiate da professionisti umani o da sistemi di intelligenza artificiale. <br>
 L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, la corrispondenza vocale e la naturalezza della recitazione. <br> Il percorso è organizzato in tre aree tematiche — Serie TV, Documentari e TV Show — e ogni contenuto propone cinque clip valutabili con le stesse domande.</p>
-<p> Clicca sul + per esplorare il contenuto della survey </p>
+            <p class="overview-invite">Clicca sulle sezioni per esplorare il contenuto del questionario.</p>
             ${overviewWrapperMarkup}
-            <p> Clicca “Inizia il questionario” per cominciare. </p>
-            <button type="button" id="start-btn">Inizia</button>
+            <div class="start-actions">
+              <p>Clicca “Inizia il questionario” per cominciare.</p>
+              <button type="button" id="start-btn">Inizia</button>
+            </div>
             <div class="status" data-role="status" aria-live="polite"></div>
           </section>
         `;
