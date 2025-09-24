@@ -79,6 +79,17 @@ Promemoria per la configurazione di Formsubmit
       color: #d9e2ef;
     }
 
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8ea3c7;
+    }
+
     .welcome {
       text-align: center;
       max-width: 860px;
@@ -108,6 +119,81 @@ Promemoria per la configurazione di Formsubmit
 
     .welcome .status {
       margin-top: clamp(0.6rem, 2vh, 0.9rem);
+    }
+
+    .welcome-overview {
+      width: 100%;
+      margin-top: clamp(1.6rem, 3.5vh, 2.6rem);
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .overview-section {
+      background: rgba(12, 18, 26, 0.82);
+      border: 1px solid rgba(120, 150, 200, 0.28);
+      border-radius: 16px;
+      padding: 1.5rem 1.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .overview-section h2 {
+      margin: 0.35rem 0 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #eef3ff;
+    }
+
+    .overview-section .eyebrow {
+      color: #a6b9d8;
+    }
+
+    .overview-description {
+      margin: 0;
+      color: #c5d5f3;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .overview-contents {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .overview-item {
+      background: rgba(8, 12, 19, 0.9);
+      border: 1px solid rgba(108, 181, 255, 0.2);
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .overview-item strong {
+      font-weight: 600;
+      color: #f0f5ff;
+      font-size: 1.05rem;
+      letter-spacing: 0.01em;
+    }
+
+    .overview-item span {
+      font-size: 0.92rem;
+      color: #b8c8e5;
+    }
+
+    .overview-item .content-count {
+      margin-top: 0.15rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8ac8ff;
+      font-weight: 600;
     }
 
     body[data-route="welcome"] {
@@ -198,7 +284,7 @@ Promemoria per la configurazione di Formsubmit
       display: flex;
       gap: clamp(1.5rem, 3vw, 3rem);
       align-items: stretch;
-      margin-top: 2.5rem;
+      margin-top: 3rem;
       flex-wrap: wrap;
     }
 
@@ -356,12 +442,127 @@ Promemoria per la configurazione di Formsubmit
     .top-bar {
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
+      gap: 1.4rem;
     }
 
-    .top-bar strong {
+    .top-bar-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .section-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(108, 181, 255, 0.35);
+      background: linear-gradient(135deg, rgba(108, 181, 255, 0.2), rgba(117, 255, 229, 0.14));
+      font-size: 0.85rem;
       font-weight: 600;
-      color: #c0d3f2;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #e8f1ff;
+    }
+
+    .top-bar .progress {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #9fb4d4;
+    }
+
+    .content-meta {
+      display: grid;
+      gap: 1.5rem;
+      align-items: stretch;
+      padding: 1.35rem 1.5rem;
+      border-radius: 16px;
+      border: 1px solid rgba(120, 150, 200, 0.28);
+      background: rgba(12, 18, 26, 0.85);
+    }
+
+    .content-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .content-info .eyebrow {
+      color: #8ea3c7;
+    }
+
+    .content-info h2 {
+      font-size: clamp(1.35rem, 1vw + 1.1rem, 1.65rem);
+      margin: 0;
+      font-weight: 600;
+      color: #f4f6fb;
+    }
+
+    .content-info p {
+      margin: 0;
+      font-size: 0.98rem;
+      color: #b8c8e5;
+      line-height: 1.6;
+    }
+
+    .clip-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      align-items: flex-start;
+    }
+
+    .clip-progress .eyebrow {
+      color: #8ea3c7;
+    }
+
+    .clip-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .clip-dot {
+      width: 2.1rem;
+      height: 2.1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(108, 181, 255, 0.25);
+      background: rgba(108, 181, 255, 0.12);
+      font-size: 0.95rem;
+      color: #cfe3ff;
+      opacity: 0.6;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+
+    .clip-dot.is-active {
+      background: linear-gradient(135deg, #6cb5ff, #75ffe5);
+      color: #0b1118;
+      box-shadow: 0 10px 24px rgba(108, 181, 255, 0.28);
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .clip-label {
+      font-size: 0.95rem;
+      color: #d0def7;
+    }
+
+    @media (min-width: 720px) {
+      .welcome-overview {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .content-meta {
+        grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+      }
     }
 
     .final-view {
@@ -382,6 +583,10 @@ Promemoria per la configurazione di Formsubmit
       line-height: 1.6;
     }
 
+    .final-note + .final-note {
+      margin-top: 1.15rem;
+    }
+
     .final-actions {
       margin-top: 2.5rem;
       display: flex;
@@ -398,6 +603,40 @@ Promemoria per la configurazione di Formsubmit
     .final-view .status {
       margin-top: 2.5rem;
       text-align: center;
+    }
+
+    .final-summary {
+      margin: 2.5rem auto 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+      max-width: 520px;
+    }
+
+    .final-summary-item {
+      background: rgba(12, 18, 26, 0.85);
+      border: 1px solid rgba(120, 150, 200, 0.28);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .final-summary-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #eef3ff;
+      letter-spacing: 0.01em;
+    }
+
+    .final-summary-meta {
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #94add3;
+      font-weight: 600;
     }
 
     .final-success {
@@ -477,6 +716,21 @@ Promemoria per la configurazione di Formsubmit
 
       .card {
         padding: 2.25rem 1.75rem;
+      }
+
+      .content-meta {
+        padding: 1.2rem 1.3rem;
+        gap: 1.1rem;
+      }
+
+      .clip-dot {
+        width: 1.85rem;
+        height: 1.85rem;
+        font-size: 0.85rem;
+      }
+
+      .welcome-overview {
+        gap: 1.25rem;
       }
 
       .video-step {
@@ -591,13 +845,14 @@ Promemoria per la configurazione di Formsubmit
         if (!conf || typeof conf !== 'object') {
           throw new Error('Configurazione mancante. Aggiungi config.js con un oggetto CONFIG.');
         }
-        const { videos, FORM_ENDPOINT, SURVEY_TITLE, VIDEO_BASE_URL } = conf;
-        if (!Array.isArray(videos) || videos.length !== 10) {
-          throw new Error('CONFIG.videos deve essere un array con 10 elementi.');
+        const { sections, FORM_ENDPOINT, SURVEY_TITLE, VIDEO_BASE_URL } = conf;
+        if (!Array.isArray(sections) || sections.length === 0) {
+          throw new Error('CONFIG.sections deve essere un array con almeno una sezione.');
         }
-        const normalizedVideos = normalizeVideos(videos, VIDEO_BASE_URL);
-        if (!normalizedVideos.every((value) => isNonEmptyString(value))) {
-          throw new Error('CONFIG.videos deve contenere URL validi o percorsi di file.');
+        const normalizedSections = normalizeSections(sections, VIDEO_BASE_URL);
+        const playlist = flattenSections(normalizedSections);
+        if (!playlist.length) {
+          throw new Error('CONFIG.sections deve includere contenuti con almeno un video.');
         }
         if (typeof FORM_ENDPOINT !== 'string' || !FORM_ENDPOINT.trim()) {
           throw new Error('CONFIG.FORM_ENDPOINT è obbligatorio.');
@@ -607,7 +862,9 @@ Promemoria per la configurazione di Formsubmit
         }
         return {
           ...conf,
-          videos: normalizedVideos
+          sections: normalizedSections,
+          playlist,
+          totalVideos: playlist.length
         };
       }
 
@@ -727,11 +984,16 @@ Promemoria per la configurazione di Formsubmit
           const saved = JSON.parse(raw);
           if (saved && typeof saved === 'object') {
             state.started = Boolean(saved.started);
-            const maxIndex = state.config.videos.length;
-            state.currentIndex = typeof saved.currentIndex === 'number' && saved.currentIndex >= 0 ? Math.min(saved.currentIndex, maxIndex) : 0;
+            const maxIndex = getTotalVideos();
+            state.currentIndex = typeof saved.currentIndex === 'number' && saved.currentIndex >= 0
+              ? Math.min(saved.currentIndex, maxIndex)
+              : 0;
             state.submitted = Boolean(saved.submitted);
             if (Array.isArray(saved.answers)) {
               state.answers = saved.answers.map((item) => normalizeAnswer(item));
+              if (state.answers.length > maxIndex) {
+                state.answers = state.answers.slice(0, maxIndex);
+              }
             }
           }
         } catch (err) {
@@ -783,7 +1045,7 @@ Promemoria per la configurazione di Formsubmit
         if (!state.started) {
           return 'welcome';
         }
-        if (state.currentIndex >= state.config.videos.length) {
+        if (state.currentIndex >= getTotalVideos()) {
           return 'final';
         }
         return 'step';
@@ -821,16 +1083,17 @@ Promemoria per la configurazione di Formsubmit
       }
 
       function renderWelcome() {
+        const overviewMarkup = buildWelcomeOverview();
         appEl.innerHTML = `
           <section class="card welcome" aria-labelledby="welcome-title">
             <div class="logo">
               <img src="MFE_-_MediaForEurope_Logo%20(1).png" alt="Logo MediaForEurope">
             </div>
             <h1 id="welcome-title">${escapeHtml(state.config.SURVEY_TITLE)}</h1>
-            <p>Benvenuto! <br> Stiamo conducendo un blind test su brevi clip doppiate da professionisti umani o da sistemi di intelligenza artificiale e in molteplici lingue. <br>
-L'obiettivo è capire come il pubblico potrebbe percepire la qualità dell'adattamento, la corrispondenza vocale e la naturalezza della recitazione. <br> Il panel è misto tra colleghi in veste di spettatori e esperti del settore, quindi il tuo punto di vista è particolarmente prezioso. 
-<br> Guarda ogni clip, rispondi alla domanda sull'AI, esprimi un giudizio da 1 (scarso) a 5 (eccellente) su ciò che suona più naturale e accurato. <br> Clicca “Inizia il questionario” per cominciare.</p>
-            <p>I progressi restano salvati finch&eacute; questa scheda rimane aperta; se la chiudi, il questionario ripartir&agrave; dall\'inizio.</p>
+            <p>Benvenuto! <br> Stiamo conducendo un blind test su brevi clip doppiate da professionisti umani o da sistemi di intelligenza artificiale. <br>
+L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, la corrispondenza vocale e la naturalezza della recitazione. <br> Il percorso è organizzato in tre aree tematiche — Serie TV, Documentari e TV Show — e ogni contenuto propone cinque clip valutabili con le stesse domande.</p>
+            <p>I progressi restano salvati finch&eacute; questa scheda rimane aperta; se la chiudi, il questionario ripartir&agrave; dall\'inizio. Puoi prenderti una pausa tra una sezione e l'altra: le risposte già inserite resteranno memorizzate.</p>
+            ${overviewMarkup ? `<div class="welcome-overview" aria-label="Struttura del questionario">${overviewMarkup}</div>` : ''}
             <button type="button" id="start-btn">Inizia</button>
             <div class="status" data-role="status" aria-live="polite"></div>
           </section>
@@ -838,7 +1101,7 @@ L'obiettivo è capire come il pubblico potrebbe percepire la qualità dell'adatt
         const startBtn = document.getElementById('start-btn');
         startBtn.addEventListener('click', () => {
           state.started = true;
-          if (state.currentIndex >= state.config.videos.length) {
+          if (state.currentIndex >= getTotalVideos()) {
             state.currentIndex = 0;
           }
           persistState();
@@ -846,22 +1109,115 @@ L'obiettivo è capire come il pubblico potrebbe percepire la qualità dell'adatt
         });
       }
 
+      function buildWelcomeOverview() {
+        const sections = state.config && Array.isArray(state.config.sections) ? state.config.sections : [];
+        if (!sections.length) {
+          return '';
+        }
+        return sections.map((section) => {
+          const contents = Array.isArray(section.contents) ? section.contents : [];
+          const description = section.description ? `<p class="overview-description">${escapeHtml(section.description)}</p>` : '';
+          const items = contents.map((content) => {
+            const clips = Array.isArray(content.videos) ? content.videos.length : 0;
+            const clipLabel = clips === 1 ? '1 clip' : `${clips} clip`;
+            const info = content.description ? `<span>${escapeHtml(content.description)}</span>` : '';
+            return `
+              <li class="overview-item">
+                <strong>${escapeHtml(content.title)}</strong>
+                ${info}
+                <span class="content-count">${escapeHtml(clipLabel)}</span>
+              </li>
+            `;
+          }).join('');
+          return `
+            <section class="overview-section">
+              <div>
+                <span class="eyebrow">Sezione</span>
+                <h2>${escapeHtml(section.title)}</h2>
+                ${description}
+              </div>
+              <ul class="overview-contents">
+                ${items}
+              </ul>
+            </section>
+          `;
+        }).join('');
+      }
+
+      function buildFinalSummary() {
+        const sections = state.config && Array.isArray(state.config.sections) ? state.config.sections : [];
+        if (!sections.length) {
+          return '';
+        }
+        const items = sections.map((section) => {
+          const contents = Array.isArray(section.contents) ? section.contents : [];
+          const clipCount = contents.reduce((acc, content) => acc + (Array.isArray(content.videos) ? content.videos.length : 0), 0);
+          const contentCount = contents.length;
+          const contentLabel = contentCount === 1 ? '1 contenuto' : `${contentCount} contenuti`;
+          const clipLabel = clipCount === 1 ? '1 clip' : `${clipCount} clip`;
+          return `
+            <li class="final-summary-item">
+              <span class="final-summary-title">${escapeHtml(section.title)}</span>
+              <span class="final-summary-meta">${escapeHtml(`${contentLabel} • ${clipLabel}`)}</span>
+            </li>
+          `;
+        }).join('');
+        if (!items) {
+          return '';
+        }
+        return `<ul class="final-summary">${items}</ul>`;
+      }
+
       function renderStep(index) {
+        const entry = getPlaylistEntry(index);
+        if (!entry) {
+          state.currentIndex = Math.min(index, getTotalVideos());
+          render();
+          return;
+        }
         const answer = state.answers[index] || {};
-        const total = state.config.videos.length;
+        const total = getTotalVideos();
         const isAi = answer.is_ai;
         const quality = typeof answer.quality === 'number' ? answer.quality : 0;
         const lowQualityReason = isValidLowQualityReason(answer.low_quality_reason)
           ? answer.low_quality_reason
           : '';
         const showLowQualityQuestion = quality >= 1 && quality <= 2;
-        const videoUrl = state.config.videos[index];
+        const videoUrl = entry.url;
         const videoMimeType = getVideoMimeType(videoUrl);
+        const clipLabel = `Clip ${entry.clipNumber} di ${entry.content.clipCount}`;
+        const progressLabel = `Video ${index + 1} di ${total} · ${entry.section.title}`;
+        const sectionTooltip = entry.section.description ? ` title="${escapeAttribute(entry.section.description)}"` : '';
+        const clipDots = Array.from({ length: entry.content.clipCount }, (_, clipIdx) => {
+          const isActive = clipIdx === entry.clipIndex;
+          const dotLabel = `Clip ${clipIdx + 1} di ${entry.content.clipCount}`;
+          const ariaCurrent = isActive ? ' aria-current="true"' : '';
+          const classes = `clip-dot${isActive ? ' is-active' : ''}`;
+          return `<span class="${classes}" role="listitem"${ariaCurrent} aria-label="${escapeAttribute(dotLabel)}">${clipIdx + 1}</span>`;
+        }).join('');
+        const contentGroupLabel = `${entry.section.title} – ${entry.content.title}`;
         appEl.innerHTML = `
           <section class="card" aria-labelledby="step-title">
             <header class="top-bar">
+              <div class="top-bar-row">
+                <span class="section-chip"${sectionTooltip}>${escapeHtml(entry.section.title)}</span>
+                <p class="progress">${escapeHtml(progressLabel)}</p>
+              </div>
               <h1 id="step-title">${escapeHtml(state.config.SURVEY_TITLE)}</h1>
-              <p class="progress">Video ${index + 1} di ${total}</p>
+              <div class="content-meta" role="group" aria-label="${escapeAttribute(contentGroupLabel)}">
+                <div class="content-info">
+                  <span class="eyebrow">Contenuto</span>
+                  <h2>${escapeHtml(entry.content.title)}</h2>
+                  ${entry.content.description ? `<p>${escapeHtml(entry.content.description)}</p>` : ''}
+                </div>
+                <div class="clip-progress">
+                  <span class="eyebrow">Clip</span>
+                  <div class="clip-dots" role="list" aria-label="Sequenza clip per ${escapeAttribute(entry.content.title)}">
+                    ${clipDots}
+                  </div>
+                  <span class="clip-label">${escapeHtml(clipLabel)}</span>
+                </div>
+              </div>
             </header>
             <div class="video-step">
               <div class="video-area">
@@ -1115,22 +1471,32 @@ L'obiettivo è capire come il pubblico potrebbe percepire la qualità dell'adatt
       }
 
       function renderFinal() {
-        const total = state.config.videos.length;
+        const total = getTotalVideos();
         const pending = state.queueLength;
         const allSent = allAnswersPosted();
         const readyToSubmit = pending === 0 && allSent;
+        const sectionsCount = state.config && Array.isArray(state.config.sections) ? state.config.sections.length : 0;
+        const totalContents = state.config && Array.isArray(state.config.sections)
+          ? state.config.sections.reduce((acc, section) => acc + (Array.isArray(section.contents) ? section.contents.length : 0), 0)
+          : 0;
+        const summaryNote = sectionsCount > 0 && totalContents > 0
+          ? `Distribuite in ${sectionsCount} ${sectionsCount === 1 ? 'sezione' : 'sezioni'} e ${totalContents} ${totalContents === 1 ? 'contenuto' : 'contenuti'}.`
+          : '';
         const noteText = state.submitted
           ? ''
           : readyToSubmit
             ? 'Premi "Invia" per completare.'
             : 'Mantieni questa pagina aperta finch&eacute; tutte le risposte non sono state sincronizzate.';
+        const summaryMarkup = buildFinalSummary();
         appEl.innerHTML = `
           <section class="card final-view" aria-labelledby="final-title">
             <div class="logo">
               <img src="MFE_-_MediaForEurope_Logo%20(1).png" alt="Logo MediaForEurope">
             </div>
             <h1 id="final-title">${escapeHtml(state.config.SURVEY_TITLE)}</h1>
-            <p class="final-message">Ottimo lavoro! Hai esaminato tutti i ${total} video.</p>
+            <p class="final-message">Ottimo lavoro! Hai esaminato tutte le ${total} clip.</p>
+            ${summaryNote ? `<p class="final-note">${escapeHtml(summaryNote)}</p>` : ''}
+            ${summaryMarkup}
             ${noteText ? `<p class="final-note">${noteText}</p>` : ''}
             <div class="final-actions">
               <button type="button" class="primary" id="submit-btn" ${readyToSubmit && !state.submitted ? '' : 'disabled'}>${state.submitted ? 'Inviato' : 'Invia'}</button>
@@ -1213,6 +1579,7 @@ L'obiettivo è capire come il pubblico potrebbe percepire la qualità dell'adatt
         const reason = isValidLowQualityReason(answer.low_quality_reason)
           ? answer.low_quality_reason
           : null;
+        const entry = getPlaylistEntry(index);
         const record = {
           user_code: state.uid,
           video_id: videoId,
@@ -1223,6 +1590,14 @@ L'obiettivo è capire come il pubblico potrebbe percepire la qualità dell'adatt
           user_agent: navigator.userAgent,
           submission_id: submissionId
         };
+        if (entry) {
+          record.section_id = entry.section.id;
+          record.section_title = entry.section.title;
+          record.content_id = entry.content.id;
+          record.content_title = entry.content.title;
+          record.clip_number = entry.clipNumber;
+          record.clip_total = entry.content.clipCount;
+        }
         answer.submissionId = submissionId;
         answer.posted = false;
         state.answers[index] = answer;
@@ -1283,7 +1658,7 @@ L'obiettivo è capire come il pubblico potrebbe percepire la qualità dell'adatt
       }
 
       function allAnswersPosted() {
-        const total = state.config.videos.length;
+        const total = getTotalVideos();
         for (let i = 0; i < total; i += 1) {
           const answer = state.answers[i];
           if (!answer || !answer.posted) {
@@ -1329,11 +1704,17 @@ L'obiettivo è capire come il pubblico potrebbe percepire la qualità dell'adatt
           panel.className = 'debug-panel';
           document.body.appendChild(panel);
         }
-        const total = state.config ? state.config.videos.length : 0;
+        const total = getTotalVideos();
+        const displayIndex = total > 0 ? Math.min(state.currentIndex + 1, total) : state.currentIndex;
+        const currentEntry = getPlaylistEntry(Math.min(state.currentIndex, total - 1));
+        const clipLabel = currentEntry
+          ? `${currentEntry.section.title} → ${currentEntry.content.title} (#${currentEntry.clipNumber}/${currentEntry.content.clipCount})`
+          : 'n/d';
         panel.innerHTML = `
           <h3>Informazioni di debug</h3>
           <p><strong>ID sessione:</strong> ${escapeHtml(state.uid || 'n/d')}</p>
-          <p><strong>Indice:</strong> ${state.currentIndex}/${total}</p>
+          <p><strong>Indice:</strong> ${displayIndex}/${total}</p>
+          <p><strong>Clip:</strong> ${escapeHtml(clipLabel)}</p>
           <p><strong>Coda:</strong> ${state.queueLength}</p>
           <button type="button" id="clear-debug">Cancella dati locali</button>
         `;
@@ -1354,6 +1735,10 @@ L'obiettivo è capire come il pubblico potrebbe percepire la qualità dell'adatt
       }
 
       function makeVideoId(index) {
+        const entry = getPlaylistEntry(index);
+        if (entry && isNonEmptyString(entry.videoId)) {
+          return entry.videoId;
+        }
         const number = String(index + 1).padStart(2, '0');
         return `video-${number}`;
       }
@@ -1374,6 +1759,124 @@ L'obiettivo è capire come il pubblico potrebbe percepire la qualità dell'adatt
           hash |= 0;
         }
         return Math.abs(hash).toString(16);
+      }
+
+      function normalizeSections(sections, defaultBaseUrl) {
+        return sections.map((section, sectionIndex) => {
+          const title = isNonEmptyString(section.title)
+            ? section.title.trim()
+            : `Sezione ${sectionIndex + 1}`;
+          const description = isNonEmptyString(section.description) ? section.description.trim() : '';
+          const sectionBase = isNonEmptyString(section.baseUrl) ? section.baseUrl : defaultBaseUrl;
+          const id = makeSafeId(section.id, title, `section-${sectionIndex + 1}`);
+          if (!Array.isArray(section.contents) || section.contents.length === 0) {
+            throw new Error(`La sezione "${title}" deve includere almeno un contenuto.`);
+          }
+          const contents = section.contents.map((content, contentIndex) => {
+            const contentTitle = isNonEmptyString(content.title)
+              ? content.title.trim()
+              : `Contenuto ${contentIndex + 1}`;
+            const contentDescription = isNonEmptyString(content.description) ? content.description.trim() : '';
+            const contentBase = isNonEmptyString(content.baseUrl) ? content.baseUrl : sectionBase;
+            const contentId = makeSafeId(content.id, `${title}-${contentTitle}`, `${id}-content-${contentIndex + 1}`);
+            if (!Array.isArray(content.videos) || content.videos.length !== 5) {
+              throw new Error(`Il contenuto "${contentTitle}" nella sezione "${title}" deve includere esattamente 5 video.`);
+            }
+            const normalizedVideos = normalizeVideos(content.videos, contentBase).map((url, videoIndex) => ({
+              url,
+              id: `${contentId}-clip-${String(videoIndex + 1).padStart(2, '0')}`
+            }));
+            return {
+              id: contentId,
+              title: contentTitle,
+              description: contentDescription,
+              videos: normalizedVideos
+            };
+          });
+          return {
+            id,
+            title,
+            description,
+            contents
+          };
+        });
+      }
+
+      function flattenSections(sections) {
+        const playlist = [];
+        sections.forEach((section, sectionIndex) => {
+          section.contents.forEach((content, contentIndex) => {
+            const totalClips = content.videos.length;
+            content.videos.forEach((video, clipIndex) => {
+              playlist.push({
+                url: video.url || '',
+                videoId: video.id || `${content.id}-clip-${String(clipIndex + 1).padStart(2, '0')}`,
+                section: {
+                  id: section.id,
+                  title: section.title,
+                  description: section.description,
+                  index: sectionIndex
+                },
+                content: {
+                  id: content.id,
+                  title: content.title,
+                  description: content.description,
+                  index: contentIndex,
+                  clipCount: totalClips
+                },
+                clipIndex,
+                clipNumber: clipIndex + 1
+              });
+            });
+          });
+        });
+        return playlist.map((entry, index) => ({
+          ...entry,
+          absoluteIndex: index,
+          absoluteNumber: index + 1
+        }));
+      }
+
+      function getPlaylistEntry(index) {
+        if (!state.config || !Array.isArray(state.config.playlist)) {
+          return null;
+        }
+        if (typeof index !== 'number' || index < 0 || index >= state.config.playlist.length) {
+          return null;
+        }
+        return state.config.playlist[index];
+      }
+
+      function getTotalVideos() {
+        if (!state.config || !Array.isArray(state.config.playlist)) {
+          return 0;
+        }
+        return state.config.playlist.length;
+      }
+
+      function makeSafeId(candidate, label, fallback) {
+        if (isNonEmptyString(candidate)) {
+          const fromCandidate = slugify(candidate);
+          if (fromCandidate) {
+            return fromCandidate;
+          }
+        }
+        if (isNonEmptyString(label)) {
+          const fromLabel = slugify(label);
+          if (fromLabel) {
+            return fromLabel;
+          }
+        }
+        return fallback;
+      }
+
+      function slugify(value) {
+        return String(value || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
       }
 
       function normalizeVideos(videos, baseUrl) {
