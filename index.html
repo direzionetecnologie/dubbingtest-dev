@@ -42,6 +42,18 @@ Promemoria per la configurazione di Formsubmit
       padding: clamp(2rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2.25rem) clamp(3rem, 6vw, 4.75rem);
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     #app {
       width: 100%;
       max-width: 1240px;
@@ -126,6 +138,54 @@ Promemoria per la configurazione di Formsubmit
       margin-top: clamp(1.8rem, 3.5vh, 2.8rem);
       display: grid;
       gap: clamp(1.1rem, 2vh, 1.6rem);
+    }
+
+    .overview-wrapper {
+      margin-top: clamp(1.8rem, 3.5vh, 2.8rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(1.1rem, 2vh, 1.6rem);
+      width: 100%;
+    }
+
+    .overview-master-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: 0;
+      color: inherit;
+      cursor: pointer;
+      transition: none;
+    }
+
+    .overview-master-toggle:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .overview-master-toggle:hover .toggle-icon {
+      background: rgba(123, 208, 255, 0.12);
+    }
+
+    .overview-master-toggle:focus-visible {
+      outline: none;
+    }
+
+    .overview-master-toggle:focus-visible .toggle-icon {
+      outline: 3px solid rgba(108, 181, 255, 0.6);
+      outline-offset: 2px;
+    }
+
+    .overview-master-panel {
+      width: 100%;
+    }
+
+    .overview-master-panel .welcome-overview {
+      margin-top: 0;
     }
 
     .overview-section {
@@ -252,6 +312,16 @@ Promemoria per la configurazione di Formsubmit
 
     .toggle-icon::after {
       transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .overview-wrapper[data-open="true"] .overview-master-toggle .toggle-icon {
+      background: rgba(123, 208, 255, 0.2);
+      color: #e0f7ff;
+    }
+
+    .overview-wrapper[data-open="true"] .overview-master-toggle .toggle-icon::after {
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(90deg) scaleX(0.2);
     }
 
     .overview-section[data-open="true"] .toggle-icon {
@@ -1245,6 +1315,19 @@ Promemoria per la configurazione di Formsubmit
 
       function renderWelcome() {
         const overviewMarkup = buildWelcomeOverview();
+        const overviewWrapperMarkup = overviewMarkup
+          ? `
+            <div class="overview-wrapper" data-open="false">
+              <button class="overview-master-toggle" type="button" aria-expanded="false" aria-controls="welcome-overview-panel">
+                <span class="sr-only">Mostra o nascondi le sezioni del questionario</span>
+                <span class="toggle-icon" aria-hidden="true"></span>
+              </button>
+              <div class="overview-master-panel" id="welcome-overview-panel" hidden>
+                <div class="welcome-overview" aria-label="Struttura del questionario">${overviewMarkup}</div>
+              </div>
+            </div>
+          `
+          : '';
         appEl.innerHTML = `
           <section class="card welcome" aria-labelledby="welcome-title">
             <div class="logo">
@@ -1253,7 +1336,7 @@ Promemoria per la configurazione di Formsubmit
             <h1 id="welcome-title">${escapeHtml(state.config.SURVEY_TITLE)}</h1>
             <p>Benvenuto! <br> Stiamo conducendo un blind test su brevi clip doppiate da professionisti umani o da sistemi di intelligenza artificiale. <br>
 L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, la corrispondenza vocale e la naturalezza della recitazione. <br> Il percorso è organizzato in tre aree tematiche — Serie TV, Documentari e TV Show — e ogni contenuto propone cinque clip valutabili con le stesse domande.</p>
-            ${overviewMarkup ? `<div class="welcome-overview" aria-label="Struttura del questionario">${overviewMarkup}</div>` : ''}
+            ${overviewWrapperMarkup}
             <button type="button" id="start-btn">Inizia</button>
             <div class="status" data-role="status" aria-live="polite"></div>
           </section>
@@ -1338,7 +1421,25 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
       }
 
       function initWelcomeOverviewInteractions() {
-        const sections = appEl.querySelectorAll('.overview-section');
+        const wrapper = appEl.querySelector('.overview-wrapper');
+        if (wrapper) {
+          const masterToggle = wrapper.querySelector('.overview-master-toggle');
+          const masterPanel = wrapper.querySelector('.overview-master-panel');
+          if (masterToggle && masterPanel) {
+            const isOpen = wrapper.dataset.open === 'true';
+            masterPanel.hidden = !isOpen;
+            masterToggle.setAttribute('aria-expanded', String(isOpen));
+            masterToggle.addEventListener('click', () => {
+              const currentlyOpen = wrapper.dataset.open === 'true';
+              const nextOpen = !currentlyOpen;
+              wrapper.dataset.open = String(nextOpen);
+              masterPanel.hidden = !nextOpen;
+              masterToggle.setAttribute('aria-expanded', String(nextOpen));
+            });
+          }
+        }
+        const sectionContainer = wrapper || appEl;
+        const sections = sectionContainer.querySelectorAll('.overview-section');
         sections.forEach((sectionEl) => {
           const toggle = sectionEl.querySelector('.overview-toggle');
           if (!toggle) {
