@@ -123,38 +123,173 @@ Promemoria per la configurazione di Formsubmit
 
     .welcome-overview {
       width: 100%;
-      margin-top: clamp(1.6rem, 3.5vh, 2.6rem);
+      margin-top: clamp(1.8rem, 3.5vh, 2.8rem);
       display: grid;
-      gap: 1.5rem;
+      gap: clamp(1.1rem, 2vh, 1.6rem);
     }
 
     .overview-section {
-      background: rgba(12, 18, 26, 0.82);
+      border-radius: 20px;
       border: 1px solid rgba(120, 150, 200, 0.28);
-      border-radius: 16px;
-      padding: 1.5rem 1.7rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
+      background: linear-gradient(160deg, rgba(18, 26, 36, 0.92), rgba(9, 13, 20, 0.92));
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
 
-    .overview-section h2 {
-      margin: 0.35rem 0 0;
-      font-size: 1.2rem;
+    .overview-section[data-open="true"] {
+      border-color: rgba(123, 208, 255, 0.55);
+      box-shadow: 0 18px 40px rgba(16, 112, 195, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .overview-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      width: 100%;
+      padding: 1.4rem 1.6rem;
+      background: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
+      border-radius: 0;
+      min-width: 0;
+      font: inherit;
+      box-shadow: none;
+      transition: background 0.2s ease;
+    }
+
+    .overview-toggle:hover {
+      background: rgba(123, 208, 255, 0.08);
+      transform: none;
+      box-shadow: none;
+    }
+
+    .overview-toggle:focus-visible {
+      outline: 3px solid rgba(108, 181, 255, 0.6);
+      outline-offset: 2px;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .overview-toggle-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .overview-toggle-text .eyebrow {
+      color: #a6b9d8;
+    }
+
+    .overview-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .overview-title-row h2 {
+      margin: 0;
+      font-size: 1.25rem;
       font-weight: 600;
       color: #eef3ff;
     }
 
-    .overview-section .eyebrow {
-      color: #a6b9d8;
+    .overview-metrics {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .overview-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 208, 255, 0.35);
+      background: rgba(123, 208, 255, 0.16);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #d3e7ff;
+      white-space: nowrap;
+    }
+
+    .toggle-icon {
+      position: relative;
+      flex-shrink: 0;
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 12px;
+      border: 1px solid rgba(123, 208, 255, 0.35);
+      background: rgba(8, 14, 23, 0.85);
+      color: #89d6ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .toggle-icon::before,
+    .toggle-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 14px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transform: translate(-50%, -50%);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .toggle-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .overview-section[data-open="true"] .toggle-icon {
+      background: rgba(123, 208, 255, 0.2);
+      color: #e0f7ff;
+    }
+
+    .overview-section[data-open="true"] .toggle-icon::after {
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(90deg) scaleX(0.2);
+    }
+
+    .overview-panel {
+      padding: 0 1.6rem 1.6rem;
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .overview-section[data-open="true"] .overview-panel {
+      animation: overviewFade 0.25s ease;
+    }
+
+    @keyframes overviewFade {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .overview-description {
       margin: 0;
       color: #c5d5f3;
       font-size: 0.95rem;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .overview-contents {
@@ -162,17 +297,23 @@ Promemoria per la configurazione di Formsubmit
       margin: 0;
       padding: 0;
       display: grid;
-      gap: 0.85rem;
+      gap: 0.9rem;
     }
 
     .overview-item {
-      background: rgba(8, 12, 19, 0.9);
+      background: rgba(6, 12, 20, 0.9);
       border: 1px solid rgba(108, 181, 255, 0.2);
-      border-radius: 12px;
-      padding: 0.9rem 1.1rem;
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .overview-item-header {
       display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
     }
 
     .overview-item strong {
@@ -182,18 +323,20 @@ Promemoria per la configurazione di Formsubmit
       letter-spacing: 0.01em;
     }
 
-    .overview-item span {
+    .overview-item-description {
+      margin: 0;
       font-size: 0.92rem;
       color: #b8c8e5;
+      line-height: 1.55;
     }
 
     .overview-item .content-count {
-      margin-top: 0.15rem;
       font-size: 0.78rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #8ac8ff;
       font-weight: 600;
+      white-space: nowrap;
     }
 
     body[data-route="welcome"] {
@@ -733,6 +876,24 @@ Promemoria per la configurazione di Formsubmit
         gap: 1.25rem;
       }
 
+      .overview-toggle {
+        padding: 1.25rem 1.35rem;
+        align-items: flex-start;
+      }
+
+      .overview-panel {
+        padding: 0 1.35rem 1.35rem;
+      }
+
+      .toggle-icon {
+        width: 2.1rem;
+        height: 2.1rem;
+      }
+
+      .overview-item {
+        padding: 0.9rem 1rem;
+      }
+
       .video-step {
         flex-direction: column;
         gap: 1.75rem;
@@ -1106,6 +1267,7 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
           persistState();
           render();
         });
+        initWelcomeOverviewInteractions();
       }
 
       function buildWelcomeOverview() {
@@ -1113,34 +1275,93 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
         if (!sections.length) {
           return '';
         }
-        return sections.map((section) => {
+        return sections.map((section, sectionIndex) => {
           const contents = Array.isArray(section.contents) ? section.contents : [];
-          const description = section.description ? `<p class="overview-description">${escapeHtml(section.description)}</p>` : '';
-          const items = contents.map((content) => {
+          const descriptionMarkup = section.description
+            ? `<p class="overview-description">${escapeHtml(section.description)}</p>`
+            : '';
+          const itemsMarkup = contents.map((content) => {
             const clips = Array.isArray(content.videos) ? content.videos.length : 0;
             const clipLabel = clips === 1 ? '1 clip' : `${clips} clip`;
-            const info = content.description ? `<span>${escapeHtml(content.description)}</span>` : '';
+            const contentDescription = content.description
+              ? `<p class="overview-item-description">${escapeHtml(content.description)}</p>`
+              : '';
             return `
               <li class="overview-item">
-                <strong>${escapeHtml(content.title)}</strong>
-                ${info}
-                <span class="content-count">${escapeHtml(clipLabel)}</span>
+                <div class="overview-item-header">
+                  <strong>${escapeHtml(content.title)}</strong>
+                  <span class="content-count">${escapeHtml(clipLabel)}</span>
+                </div>
+                ${contentDescription}
               </li>
             `;
           }).join('');
-          return `
-            <section class="overview-section">
-              <div>
-                <span class="eyebrow">Sezione</span>
-                <h2>${escapeHtml(section.title)}</h2>
-                ${description}
+          const listMarkup = itemsMarkup ? `<ul class="overview-contents">${itemsMarkup}</ul>` : '';
+          const contentCount = contents.length;
+          const totalClips = contents.reduce((acc, content) => acc + (Array.isArray(content.videos) ? content.videos.length : 0), 0);
+          const contentLabel = contentCount === 1 ? '1 contenuto' : `${contentCount} contenuti`;
+          const clipLabel = totalClips === 1 ? '1 clip' : `${totalClips} clip`;
+          const sectionId = `overview-section-${sectionIndex}`;
+          const panelId = `overview-panel-${sectionIndex}`;
+          const hasPanel = Boolean(descriptionMarkup || listMarkup);
+          const controlsAttr = hasPanel ? ` aria-controls="${panelId}"` : '';
+          const expandedValue = hasPanel ? 'false' : 'true';
+          const openValue = hasPanel ? 'false' : 'true';
+          const panelMarkup = hasPanel
+            ? `
+              <div class="overview-panel" id="${panelId}" role="region" aria-labelledby="${sectionId}" hidden>
+                ${descriptionMarkup}
+                ${listMarkup}
               </div>
-              <ul class="overview-contents">
-                ${items}
-              </ul>
+            `
+            : '';
+          const iconMarkup = hasPanel ? '<span class="toggle-icon" aria-hidden="true"></span>' : '';
+          return `
+            <section class="overview-section" data-open="${openValue}">
+              <button class="overview-toggle" type="button" id="${sectionId}" aria-expanded="${expandedValue}"${controlsAttr}>
+                <div class="overview-toggle-text">
+                  <span class="eyebrow">Sezione ${sectionIndex + 1}</span>
+                  <div class="overview-title-row">
+                    <h2>${escapeHtml(section.title)}</h2>
+                    <div class="overview-metrics">
+                      <span class="overview-pill">${escapeHtml(contentLabel)}</span>
+                      <span class="overview-pill">${escapeHtml(clipLabel)}</span>
+                    </div>
+                  </div>
+                </div>
+                ${iconMarkup}
+              </button>
+              ${panelMarkup}
             </section>
           `;
         }).join('');
+      }
+
+      function initWelcomeOverviewInteractions() {
+        const sections = appEl.querySelectorAll('.overview-section');
+        sections.forEach((sectionEl) => {
+          const toggle = sectionEl.querySelector('.overview-toggle');
+          if (!toggle) {
+            return;
+          }
+          const panel = sectionEl.querySelector('.overview-panel');
+          const hasPanel = Boolean(panel);
+          if (!hasPanel) {
+            toggle.setAttribute('aria-expanded', 'true');
+            sectionEl.dataset.open = 'true';
+            return;
+          }
+          const isOpen = sectionEl.dataset.open === 'true';
+          panel.hidden = !isOpen;
+          toggle.setAttribute('aria-expanded', String(isOpen));
+          toggle.addEventListener('click', () => {
+            const currentlyOpen = sectionEl.dataset.open === 'true';
+            const nextOpen = !currentlyOpen;
+            sectionEl.dataset.open = String(nextOpen);
+            panel.hidden = !nextOpen;
+            toggle.setAttribute('aria-expanded', String(nextOpen));
+          });
+        });
       }
 
       function buildFinalSummary() {
