@@ -539,52 +539,125 @@ Promemoria per la configurazione di Formsubmit
 
     .questions {
       flex: 1 1 360px;
-      min-width: 300px;
-      background: rgba(12, 17, 25, 0.85);
-      border-radius: 18px;
-      padding: 2rem;
-      border: 1px solid rgba(90, 120, 150, 0.2);
+      min-width: 320px;
+      background: linear-gradient(165deg, rgba(10, 16, 24, 0.92), rgba(7, 12, 20, 0.86));
+      border-radius: 22px;
+      padding: clamp(1.75rem, 2.5vw, 2.4rem);
+      border: 1px solid rgba(90, 120, 150, 0.22);
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1.25rem, 2vw, 1.65rem);
     }
 
     fieldset {
-      border: none;
-      padding: 0;
-      margin: 0 0 1.75rem;
+      border: 1px solid rgba(108, 181, 255, 0.16);
+      border-radius: 20px;
+      padding: clamp(1.35rem, 2vw, 1.75rem);
+      margin: 0;
+      background: rgba(9, 15, 23, 0.86);
+      box-shadow: 0 18px 38px rgba(4, 9, 16, 0.35);
     }
 
-    legend {
-      font-size: 1.15rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-      color: #f2f5ff;
-    }
-
-    .option {
-      display: block;
-      margin-bottom: 0.85rem;
-      font-size: 1.08rem;
-      color: #dbe5f3;
-    }
-
-    .option input[type="radio"] {
-      margin-right: 0.65rem;
-      width: 1.1rem;
-      height: 1.1rem;
-      accent-color: #6cb5ff;
-    }
-
-    .stars-fieldset {
-      margin-bottom: 0.5rem;
+    fieldset[hidden] {
+      display: none !important;
     }
 
     .followup-fieldset {
-      margin-top: 1.25rem;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .followup-fieldset[data-visible="true"] {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    legend {
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      margin: 0 0 0.85rem;
+      font-weight: 600;
+      color: #f2f5ff;
+      letter-spacing: 0.01em;
+    }
+
+    .fieldset-note {
+      margin: 0 0 1.05rem;
+      font-size: 0.92rem;
+      color: #9fb3d8;
+    }
+
+    .rating-note {
+      color: #7ea8dd;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    .improvement-options {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    @media (min-width: 640px) {
+      .improvement-options {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+    }
+
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(108, 181, 255, 0.16);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      font-size: 1.02rem;
+      color: #e4ebff;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .option:hover,
+    .option:focus-within {
+      border-color: rgba(108, 181, 255, 0.55);
+      background: rgba(108, 181, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .option input[type="checkbox"] {
+      margin-top: 0.2rem;
+      width: 1.1rem;
+      height: 1.1rem;
+      accent-color: #6cb5ff;
+      flex-shrink: 0;
+      border-radius: 6px;
+    }
+
+    .option span {
+      line-height: 1.45;
+      font-weight: 500;
+    }
+
+    .stars-fieldset {
+      margin-bottom: 0.25rem;
     }
 
     .stars {
       display: inline-flex;
-      gap: 0.35rem;
+      gap: 0.4rem;
       align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.45rem 0.65rem;
+      border-radius: 18px;
+      border: 1px solid rgba(108, 181, 255, 0.22);
+      background: radial-gradient(circle at top, rgba(108, 181, 255, 0.16), rgba(28, 46, 71, 0.2) 55%, rgba(12, 20, 31, 0.3));
+      box-shadow: inset 0 0 18px rgba(8, 15, 26, 0.45);
     }
 
     .stars input[type="radio"] {
@@ -594,7 +667,7 @@ Promemoria per la configurazione di Formsubmit
     }
 
     .stars label {
-      font-size: 2.2rem;
+      font-size: clamp(2rem, 3vw + 1rem, 2.55rem);
       color: #2f3845;
       cursor: pointer;
       transition: color 0.2s ease, transform 0.2s ease;
@@ -608,6 +681,8 @@ Promemoria per la configurazione di Formsubmit
 
     .stars label.active {
       color: #f6c445;
+      text-shadow: 0 0 18px rgba(246, 196, 69, 0.45);
+      transform: scale(1.05);
     }
 
     .stars label:hover,
@@ -615,6 +690,7 @@ Promemoria per la configurazione di Formsubmit
     .stars input[type="radio"]:focus + label {
       color: #ffe27a;
       box-shadow: 0 0 0 2px rgba(116, 154, 255, 0.35);
+      transform: scale(1.05);
     }
 
     .progress {
@@ -1018,6 +1094,45 @@ Promemoria per la configurazione di Formsubmit
         { value: 'acting', label: 'Interpretazione attoriale' }
       ];
 
+      function isValidLowQualityReasonValue(value) {
+        return typeof value === 'string' && LOW_QUALITY_REASONS.some((reason) => reason.value === value);
+      }
+
+      function normalizeLowQualityReasons(input) {
+        const list = Array.isArray(input) ? input : typeof input === 'string' ? [input] : [];
+        const selected = new Set();
+        list.forEach((item) => {
+          if (typeof item !== 'string') {
+            return;
+          }
+          const trimmed = item.trim();
+          if (isValidLowQualityReasonValue(trimmed)) {
+            selected.add(trimmed);
+          }
+        });
+        return LOW_QUALITY_REASONS
+          .map((reason) => reason.value)
+          .filter((value) => selected.has(value));
+      }
+
+      function areReasonArraysEqual(a, b) {
+        if (a === b) {
+          return true;
+        }
+        if (!Array.isArray(a) || !Array.isArray(b)) {
+          return false;
+        }
+        if (a.length !== b.length) {
+          return false;
+        }
+        for (let i = 0; i < a.length; i += 1) {
+          if (a[i] !== b[i]) {
+            return false;
+          }
+        }
+        return true;
+      }
+
       const storageKeys = {
         state: (uid) => `survey_state_${toStorageKeyFragment(uid)}`,
         queue: (uid) => `survey_queue_${toStorageKeyFragment(uid)}`
@@ -1237,14 +1352,14 @@ Promemoria per la configurazione di Formsubmit
           return {};
         }
         const normalized = {
-          is_ai: value.is_ai === 'yes' || value.is_ai === 'no' ? value.is_ai : undefined,
           quality: typeof value.quality === 'number' ? value.quality : undefined,
-          low_quality_reason: isValidLowQualityReason(value.low_quality_reason)
-            ? value.low_quality_reason
-            : undefined,
           posted: Boolean(value.posted),
           submissionId: typeof value.submissionId === 'string' ? value.submissionId : undefined
         };
+        const reasons = normalizeLowQualityReasons(value.low_quality_reasons || value.low_quality_reason);
+        if (reasons.length > 0) {
+          normalized.low_quality_reasons = reasons;
+        }
         return normalized;
       }
 
@@ -1500,12 +1615,9 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
         }
         const answer = state.answers[index] || {};
         const total = getTotalVideos();
-        const isAi = answer.is_ai;
         const quality = typeof answer.quality === 'number' ? answer.quality : 0;
-        const lowQualityReason = isValidLowQualityReason(answer.low_quality_reason)
-          ? answer.low_quality_reason
-          : '';
-        const showLowQualityQuestion = quality >= 1 && quality <= 2;
+        const lowQualityReasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
+        const showLowQualityQuestion = quality >= 1 && quality <= 3;
         const videoUrl = entry.url;
         const videoMimeType = getVideoMimeType(videoUrl);
         const clipLabel = `Clip ${entry.clipNumber} di ${entry.content.clipCount}`;
@@ -1553,19 +1665,9 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
                 </div>
               </div>
               <form class="questions" id="step-form">
-                <fieldset>
-                  <legend>Questo video &egrave; doppiato con l\'IA?</legend>
-                  <label class="option">
-                    <input type="radio" name="is-ai" value="yes" ${isAi === 'yes' ? 'checked' : ''}>
-                    S&igrave;
-                  </label>
-                  <label class="option">
-                    <input type="radio" name="is-ai" value="no" ${isAi === 'no' ? 'checked' : ''}>
-                    No
-                  </label>
-                </fieldset>
                 <fieldset class="stars-fieldset">
                   <legend>Valuta la qualit&agrave;</legend>
+                  <p class="fieldset-note rating-note">1 = scarso &bull; 5 = eccellente</p>
                   <div class="stars" role="radiogroup" aria-label="Valutazione della qualit&agrave; da una a cinque stelle">
                     ${[1, 2, 3, 4, 5].map((value) => `
                       <div class="star-wrapper">
@@ -1576,13 +1678,16 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
                   </div>
                 </fieldset>
                 <fieldset class="followup-fieldset" data-role="low-quality-reason" ${showLowQualityQuestion ? '' : 'hidden'}>
-                  <legend>Quali sono i motivi per cui lo ritieni poco buono?</legend>
-                  ${LOW_QUALITY_REASONS.map((option) => `
-                    <label class="option">
-                      <input type="radio" name="low-quality-reason" value="${option.value}" ${lowQualityReason === option.value ? 'checked' : ''}>
-                      ${option.label}
-                    </label>
-                  `).join('')}
+                  <legend>Quali aspetti pensi si possano migliorare?</legend>
+                  <p class="fieldset-note">Puoi selezionare pi&ugrave; elementi.</p>
+                  <div class="improvement-options">
+                    ${LOW_QUALITY_REASONS.map((option) => `
+                      <label class="option">
+                        <input type="checkbox" name="low-quality-reasons" value="${escapeAttribute(option.value)}" ${lowQualityReasons.includes(option.value) ? 'checked' : ''}>
+                        <span>${escapeHtml(option.label)}</span>
+                      </label>
+                    `).join('')}
+                  </div>
                 </fieldset>
               </form>
             </div>
@@ -1674,20 +1779,19 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
         const backBtn = appEl.querySelector('[data-action="back"]');
         const starsContainer = form.querySelector('.stars');
         const qualityInputs = Array.from(form.querySelectorAll('input[name="quality"]'));
-        const aiInputs = Array.from(form.querySelectorAll('input[name="is-ai"]'));
         const reasonFieldset = form.querySelector('[data-role="low-quality-reason"]');
-        const reasonInputs = Array.from(form.querySelectorAll('input[name="low-quality-reason"]'));
+        const reasonInputs = Array.from(form.querySelectorAll('input[name="low-quality-reasons"]'));
 
         paintStars(starsContainer, quality);
         updateReasonVisibility(quality, { preserveSelection: true });
 
         function updateNextState() {
           const answer = state.answers[index] || {};
-          const aiAnswered = answer.is_ai === 'yes' || answer.is_ai === 'no';
           const qualityAnswered = typeof answer.quality === 'number' && answer.quality >= 1 && answer.quality <= 5;
-          const needsReason = qualityAnswered && answer.quality <= 2;
-          const reasonAnswered = !needsReason || (typeof answer.low_quality_reason === 'string' && answer.low_quality_reason.length > 0);
-          nextBtn.disabled = !(aiAnswered && qualityAnswered && reasonAnswered);
+          const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
+          const needsReason = qualityAnswered && answer.quality <= 3;
+          const reasonAnswered = !needsReason || reasons.length > 0;
+          nextBtn.disabled = !(qualityAnswered && reasonAnswered);
         }
 
         function updateReasonVisibility(currentQuality, options = {}) {
@@ -1695,33 +1799,25 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
             return;
           }
           const { preserveSelection } = options;
-          const shouldShow = typeof currentQuality === 'number' && currentQuality >= 1 && currentQuality <= 2;
+          const shouldShow = typeof currentQuality === 'number' && currentQuality >= 1 && currentQuality <= 3;
           reasonFieldset.hidden = !shouldShow;
+          reasonFieldset.setAttribute('aria-hidden', String(!shouldShow));
+          reasonFieldset.dataset.visible = shouldShow ? 'true' : 'false';
           reasonInputs.forEach((input) => {
             input.disabled = !shouldShow;
           });
           if (!shouldShow && !preserveSelection) {
-            let hadChecked = false;
+            const hadChecked = reasonInputs.some((input) => input.checked);
             reasonInputs.forEach((input) => {
-              if (input.checked) {
-                hadChecked = true;
-              }
               input.checked = false;
             });
             const stored = state.answers[index] || {};
-            if (stored.low_quality_reason || hadChecked) {
-              saveAnswer(index, { low_quality_reason: null });
+            const storedReasons = normalizeLowQualityReasons(stored.low_quality_reasons || stored.low_quality_reason);
+            if (storedReasons.length > 0 || hadChecked) {
+              saveAnswer(index, { low_quality_reasons: [] });
             }
           }
         }
-
-        aiInputs.forEach((input) => {
-          input.addEventListener('change', (event) => {
-            saveAnswer(index, { is_ai: event.target.value });
-            updateNextState();
-          });
-          input.addEventListener('keydown', handleRadioNavigation);
-        });
 
         qualityInputs.forEach((input) => {
           input.addEventListener('change', (event) => {
@@ -1738,10 +1834,10 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
 
         reasonInputs.forEach((input) => {
           input.addEventListener('change', (event) => {
-            if (!event.target.checked) {
-              return;
-            }
-            saveAnswer(index, { low_quality_reason: event.target.value });
+            const selected = reasonInputs
+              .filter((item) => item.checked)
+              .map((item) => item.value);
+            saveAnswer(index, { low_quality_reasons: selected });
             updateNextState();
           });
         });
@@ -1786,11 +1882,11 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
         if (!answer) {
           return false;
         }
-        const aiAnswered = answer.is_ai === 'yes' || answer.is_ai === 'no';
         const qualityAnswered = typeof answer.quality === 'number' && answer.quality >= 1 && answer.quality <= 5;
-        const needsReason = qualityAnswered && answer.quality <= 2;
-        const reasonAnswered = !needsReason || (typeof answer.low_quality_reason === 'string' && answer.low_quality_reason.length > 0);
-        return aiAnswered && qualityAnswered && reasonAnswered;
+        const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
+        const needsReason = qualityAnswered && answer.quality <= 3;
+        const reasonAnswered = !needsReason || reasons.length > 0;
+        return qualityAnswered && reasonAnswered;
       }
 
       function renderFinal() {
@@ -1859,29 +1955,31 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
 
       function saveAnswer(index, partial) {
         const current = state.answers[index] ? { ...state.answers[index] } : {};
-        let changed = false;
-        if (Object.prototype.hasOwnProperty.call(partial, 'is_ai')) {
-          if (current.is_ai !== partial.is_ai) {
-            changed = true;
-          }
-          current.is_ai = partial.is_ai;
+        delete current.is_ai;
+        const existingReasons = normalizeLowQualityReasons(current.low_quality_reasons || current.low_quality_reason);
+        if (existingReasons.length > 0) {
+          current.low_quality_reasons = existingReasons;
+        } else {
+          delete current.low_quality_reasons;
         }
+        delete current.low_quality_reason;
+        let changed = false;
         if (Object.prototype.hasOwnProperty.call(partial, 'quality')) {
           if (current.quality !== partial.quality) {
             changed = true;
           }
           current.quality = partial.quality;
         }
-        if (Object.prototype.hasOwnProperty.call(partial, 'low_quality_reason')) {
-          const value = partial.low_quality_reason;
-          const normalized = isValidLowQualityReason(value) ? value : undefined;
-          if (normalized !== current.low_quality_reason) {
+        if (Object.prototype.hasOwnProperty.call(partial, 'low_quality_reasons')) {
+          const normalized = normalizeLowQualityReasons(partial.low_quality_reasons);
+          const existing = Array.isArray(current.low_quality_reasons) ? current.low_quality_reasons : [];
+          if (!areReasonArraysEqual(normalized, existing)) {
             changed = true;
           }
-          if (normalized) {
-            current.low_quality_reason = normalized;
+          if (normalized.length > 0) {
+            current.low_quality_reasons = normalized;
           } else {
-            delete current.low_quality_reason;
+            delete current.low_quality_reasons;
           }
         }
         if (changed) {
@@ -1899,16 +1997,13 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
         const videoId = makeVideoId(index);
         const submissionId = makeSubmissionId(state.uid, videoId, answer);
         const timestamp = new Date().toISOString();
-        const reason = isValidLowQualityReason(answer.low_quality_reason)
-          ? answer.low_quality_reason
-          : null;
+        const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
         const entry = getPlaylistEntry(index);
         const record = {
           user_code: state.uid,
           video_id: videoId,
-          is_ai: answer.is_ai,
           quality_rating: answer.quality,
-          low_quality_reason: reason,
+          low_quality_reasons: reasons,
           timestamp,
           user_agent: navigator.userAgent,
           submission_id: submissionId
@@ -2067,10 +2162,8 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
       }
 
       function makeSubmissionId(uid, videoId, answer) {
-        const reason = isValidLowQualityReason(answer.low_quality_reason)
-          ? answer.low_quality_reason
-          : '';
-        const payload = `${uid}::${videoId}::${answer.is_ai}::${answer.quality}::${reason}`;
+        const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
+        const payload = `${uid}::${videoId}::${answer.quality}::${reasons.join('|')}`;
         const hash = hashString(payload);
         return `${uid}-${videoId}-${hash}`;
       }
@@ -2273,10 +2366,6 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
         return typeof value === 'string' && value.trim().length > 0;
       }
 
-      function isValidLowQualityReason(value) {
-        return typeof value === 'string' && LOW_QUALITY_REASONS.some((reason) => reason.value === value);
-      }
-
       function escapeHtml(str) {
         if (typeof str !== 'string') {
           return '';
@@ -2361,31 +2450,6 @@ L'obiettivo è capire come il pubblico percepisce la qualità dell'adattamento, 
         let targetIndex = index + step;
         targetIndex = Math.min(Math.max(targetIndex, 0), list.length - 1);
         const target = list[targetIndex];
-        if (target) {
-          target.checked = true;
-          target.focus();
-          target.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-      }
-
-      function handleRadioNavigation(event) {
-        if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
-          return;
-        }
-        const radios = Array.from(document.querySelectorAll('input[name="is-ai"]'));
-        const currentIndex = radios.findIndex((radio) => radio === event.target);
-        if (currentIndex === -1) {
-          return;
-        }
-        event.preventDefault();
-        const step = event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? -1 : 1;
-        let nextIndex = currentIndex + step;
-        if (nextIndex < 0) {
-          nextIndex = radios.length - 1;
-        } else if (nextIndex >= radios.length) {
-          nextIndex = 0;
-        }
-        const target = radios[nextIndex];
         if (target) {
           target.checked = true;
           target.focus();
