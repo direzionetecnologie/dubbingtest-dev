@@ -1,5 +1,5 @@
 window.CONFIG = {
-  SURVEY_TITLE: 'Questionario sulla qualità del doppiaggio IA',
+  SURVEY_TITLE: 'Test di Valutazione del Doppiaggio',
   FORM_ENDPOINT: 'https://formsubmit.co/ajax/tech.transformation.mdst@gmail.com',
   VIDEO_BASE_URL: 'https://aiworkshopmediaset.s3.eu-west-1.amazonaws.com/video/',
   sections: [
