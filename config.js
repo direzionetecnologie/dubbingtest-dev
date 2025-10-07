@@ -38,7 +38,15 @@ window.CONFIG = {
             'ChicagoFire_DoppiaggioUmano.mp4',
             'IT_A3_CHICAGO_FIRE_Panjaya_DUB.mp4'
           ]
-        }
+        },
+         {
+          title: 'La Casa Fuerte',
+          description: 'TV Show',
+          videos: [
+            'C2_LA_CASA_FUERTE_IT-IT_VOISEED.mp4',
+            'C2 LA CASA FUERTE_IT_ElevenLabs_2025-09-25.mp4'
+          ]
+        },
       ]
     },
     {
@@ -69,7 +77,6 @@ window.CONFIG = {
           videos: [
             'C2_LA_CASA_FUERTE_EN-US_VOISEED.mp4',
             'C2 LA CASA FUERTE_EN_ElevenLabs_2025-09-25.mp4',
-            'C2_LA_CASA_FUERTE_IT-IT_VOISEED.mp4'
           ]
         }
       ]
