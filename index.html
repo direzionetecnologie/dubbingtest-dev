@@ -596,12 +596,13 @@ Promemoria per la configurazione di Formsubmit
 
     .improvement-options {
       display: grid;
-      gap: 0.7rem;
+      gap: 0.8rem;
     }
 
     @media (min-width: 640px) {
       .improvement-options {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        align-items: stretch;
       }
     }
 
@@ -612,10 +613,10 @@ Promemoria per la configurazione di Formsubmit
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(108, 181, 255, 0.16);
       border-radius: 14px;
-      padding: 0.75rem 0.9rem;
+      padding: clamp(0.75rem, 0.65vw + 0.55rem, 1rem) clamp(0.85rem, 0.8vw + 0.6rem, 1.2rem);
       font-size: 0.98rem;
       color: #e4ebff;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
       cursor: pointer;
       user-select: none;
     }
@@ -625,6 +626,7 @@ Promemoria per la configurazione di Formsubmit
       border-color: rgba(108, 181, 255, 0.55);
       background: rgba(108, 181, 255, 0.14);
       transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(9, 16, 27, 0.35);
     }
 
     .option input[type="checkbox"] {
@@ -639,6 +641,82 @@ Promemoria per la configurazione di Formsubmit
     .option span {
       line-height: 1.35;
       font-weight: 500;
+      flex: 1;
+    }
+
+    .option-other {
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: clamp(0.95rem, 0.8vw + 0.75rem, 1.2rem);
+      grid-column: 1 / -1;
+      cursor: default;
+    }
+
+    .option-other .option-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .option-other .option-header label {
+      cursor: pointer;
+      font-weight: 600;
+      color: #f1f6ff;
+    }
+
+    .option-other textarea {
+      width: 100%;
+      min-height: 3.6rem;
+      resize: vertical;
+      border-radius: 12px;
+      border: 1px solid rgba(108, 181, 255, 0.3);
+      background: rgba(12, 20, 30, 0.72);
+      color: #f5f8ff;
+      font-family: inherit;
+      font-size: 0.96rem;
+      line-height: 1.5;
+      padding: 0.65rem 0.75rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .option-other textarea::placeholder {
+      color: #9fb3d8;
+    }
+
+    .option-other textarea:focus {
+      outline: none;
+      border-color: rgba(123, 208, 255, 0.8);
+      box-shadow: 0 8px 18px rgba(16, 30, 46, 0.45);
+      background: rgba(16, 28, 42, 0.95);
+    }
+
+    .option-other textarea:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      border-color: rgba(108, 181, 255, 0.14);
+      background: rgba(10, 16, 24, 0.55);
+      box-shadow: none;
+    }
+
+    .option-other.is-active {
+      border-color: rgba(123, 208, 255, 0.65);
+      background: linear-gradient(160deg, rgba(18, 26, 36, 0.94), rgba(9, 13, 20, 0.92));
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .option-other.is-active .option-header label {
+      color: #d2e8ff;
+    }
+
+    .option-helper {
+      margin: 0;
+      font-size: 0.82rem;
+      color: #8ea3c7;
+      line-height: 1.4;
+    }
+
+    .option-other.is-active .option-helper {
+      color: #b9d6ff;
     }
 
     .stars-fieldset {
@@ -1086,10 +1164,11 @@ Promemoria per la configurazione di Formsubmit
         queueLength: 0
       };
 
+      const LOW_QUALITY_OTHER_VALUE = 'other';
       const LOW_QUALITY_REASONS = [
         { value: 'lip-sync', label: 'Sincronizzazione labiale' },
         { value: 'voice', label: 'Qualità vocale' },
-        { value: 'acting', label: 'Interpretazione attoriale' }
+        { value: LOW_QUALITY_OTHER_VALUE, label: 'Altro', type: 'other' }
       ];
 
       function isValidLowQualityReasonValue(value) {
@@ -1111,6 +1190,13 @@ Promemoria per la configurazione di Formsubmit
         return LOW_QUALITY_REASONS
           .map((reason) => reason.value)
           .filter((value) => selected.has(value));
+      }
+
+      function normalizeLowQualityOtherText(value) {
+        if (typeof value !== 'string') {
+          return '';
+        }
+        return value.trim();
       }
 
       function areReasonArraysEqual(a, b) {
@@ -1357,6 +1443,10 @@ Promemoria per la configurazione di Formsubmit
         const reasons = normalizeLowQualityReasons(value.low_quality_reasons || value.low_quality_reason);
         if (reasons.length > 0) {
           normalized.low_quality_reasons = reasons;
+        }
+        const otherText = normalizeLowQualityOtherText(value.low_quality_other_text);
+        if (otherText) {
+          normalized.low_quality_other_text = otherText;
         }
         return normalized;
       }
@@ -1617,6 +1707,11 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
         const total = getTotalVideos();
         const quality = typeof answer.quality === 'number' ? answer.quality : 0;
         const lowQualityReasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
+        const otherText = typeof answer.low_quality_other_text === 'string' ? answer.low_quality_other_text : '';
+        const isOtherSelected = lowQualityReasons.includes(LOW_QUALITY_OTHER_VALUE);
+        const otherPlaceholder = isOtherSelected
+          ? 'Descrivi quali aspetti migliorare…'
+          : 'Seleziona “Altro” per specificare';
         const showLowQualityQuestion = quality >= 1 && quality <= 3;
         const videoUrl = entry.url;
         const videoMimeType = getVideoMimeType(videoUrl);
@@ -1681,12 +1776,40 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
                   <legend>Quali aspetti pensi si possano migliorare?</legend>
                   <p class="fieldset-note">Puoi selezionare pi&ugrave; elementi.</p>
                   <div class="improvement-options">
-                    ${LOW_QUALITY_REASONS.map((option) => `
-                      <label class="option">
-                        <input type="checkbox" name="low-quality-reasons" value="${escapeAttribute(option.value)}" ${lowQualityReasons.includes(option.value) ? 'checked' : ''}>
-                        <span>${escapeHtml(option.label)}</span>
-                      </label>
-                    `).join('')}
+                    ${LOW_QUALITY_REASONS.map((option) => {
+                      if (option.type === 'other') {
+                        const checkboxId = `low-quality-${option.value}-${index + 1}`;
+                        const textareaId = `low-quality-other-text-${index + 1}`;
+                        const helperId = `low-quality-other-helper-${index + 1}`;
+                        return `
+                          <div class="option option-other${isOtherSelected ? ' is-active' : ''}" data-role="low-quality-other-container">
+                            <div class="option-header">
+                              <input type="checkbox" id="${escapeAttribute(checkboxId)}" name="low-quality-reasons" value="${escapeAttribute(option.value)}" ${isOtherSelected ? 'checked' : ''}>
+                              <label for="${escapeAttribute(checkboxId)}">${escapeHtml(option.label)}</label>
+                            </div>
+                            <textarea
+                              id="${escapeAttribute(textareaId)}"
+                              name="low-quality-other-text"
+                              data-role="low-quality-other-text"
+                              rows="3"
+                              maxlength="400"
+                              ${isOtherSelected ? '' : 'disabled'}
+                              placeholder="${escapeAttribute(otherPlaceholder)}"
+                              aria-describedby="${escapeAttribute(helperId)}"
+                              aria-required="${isOtherSelected ? 'true' : 'false'}"
+                              spellcheck="true"
+                            >${escapeHtml(otherText)}</textarea>
+                            <p class="option-helper" id="${escapeAttribute(helperId)}">Specifica quali aspetti vorresti migliorare (campo obbligatorio se selezioni “Altro”).</p>
+                          </div>
+                        `;
+                      }
+                      return `
+                        <label class="option">
+                          <input type="checkbox" name="low-quality-reasons" value="${escapeAttribute(option.value)}" ${lowQualityReasons.includes(option.value) ? 'checked' : ''}>
+                          <span>${escapeHtml(option.label)}</span>
+                        </label>
+                      `;
+                    }).join('')}
                   </div>
                 </fieldset>
               </form>
@@ -1781,16 +1904,22 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
         const qualityInputs = Array.from(form.querySelectorAll('input[name="quality"]'));
         const reasonFieldset = form.querySelector('[data-role="low-quality-reason"]');
         const reasonInputs = Array.from(form.querySelectorAll('input[name="low-quality-reasons"]'));
+        const otherCheckbox = form.querySelector(`input[name="low-quality-reasons"][value="${LOW_QUALITY_OTHER_VALUE}"]`);
+        const otherTextarea = form.querySelector('[data-role="low-quality-other-text"]');
+        const otherContainer = form.querySelector('[data-role="low-quality-other-container"]');
 
         paintStars(starsContainer, quality);
         updateReasonVisibility(quality, { preserveSelection: true });
+        refreshOtherControls();
 
         function updateNextState() {
           const answer = state.answers[index] || {};
           const qualityAnswered = typeof answer.quality === 'number' && answer.quality >= 1 && answer.quality <= 5;
           const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
           const needsReason = qualityAnswered && answer.quality <= 3;
-          const reasonAnswered = !needsReason || reasons.length > 0;
+          const otherText = normalizeLowQualityOtherText(answer.low_quality_other_text);
+          const otherSelected = reasons.includes(LOW_QUALITY_OTHER_VALUE);
+          const reasonAnswered = !needsReason || (reasons.length > 0 && (!otherSelected || otherText.length > 0));
           nextBtn.disabled = !(qualityAnswered && reasonAnswered);
         }
 
@@ -1816,6 +1945,64 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
             if (storedReasons.length > 0 || hadChecked) {
               saveAnswer(index, { low_quality_reasons: [] });
             }
+            clearOtherAnswer();
+          }
+          refreshOtherControls();
+        }
+
+        function getStoredOtherText() {
+          const stored = state.answers[index];
+          return stored && typeof stored.low_quality_other_text === 'string' ? stored.low_quality_other_text : '';
+        }
+
+        function refreshOtherControls(options = {}) {
+          const { focus = false } = options;
+          if (!otherTextarea) {
+            if (otherContainer) {
+              otherContainer.classList.remove('is-active');
+            }
+            return;
+          }
+          const fieldsetVisible = reasonFieldset ? !reasonFieldset.hidden : true;
+          const isChecked = Boolean(fieldsetVisible && otherCheckbox && otherCheckbox.checked);
+          otherTextarea.disabled = !isChecked;
+          otherTextarea.required = isChecked;
+          otherTextarea.setAttribute('aria-required', isChecked ? 'true' : 'false');
+          otherTextarea.setAttribute('aria-hidden', isChecked ? 'false' : 'true');
+          otherTextarea.placeholder = isChecked ? 'Descrivi quali aspetti migliorare…' : 'Seleziona “Altro” per specificare';
+          if (isChecked && focus) {
+            const raf = typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function'
+              ? window.requestAnimationFrame.bind(window)
+              : (cb) => setTimeout(cb, 16);
+            raf(() => {
+              otherTextarea.focus();
+              otherTextarea.select();
+            });
+          }
+          if (otherContainer) {
+            otherContainer.classList.toggle('is-active', isChecked);
+          }
+        }
+
+        function clearOtherAnswer() {
+          if (!otherTextarea) {
+            if (otherContainer) {
+              otherContainer.classList.remove('is-active');
+            }
+            return;
+          }
+          const storedText = normalizeLowQualityOtherText(getStoredOtherText());
+          if (otherTextarea.value) {
+            otherTextarea.value = '';
+          }
+          if (storedText) {
+            saveAnswer(index, { low_quality_other_text: '' });
+          }
+          if (otherCheckbox) {
+            otherCheckbox.checked = false;
+          }
+          if (otherContainer) {
+            otherContainer.classList.remove('is-active');
           }
         }
 
@@ -1838,9 +2025,27 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
               .filter((item) => item.checked)
               .map((item) => item.value);
             saveAnswer(index, { low_quality_reasons: selected });
+            if (event.target.value === LOW_QUALITY_OTHER_VALUE) {
+              if (event.target.checked) {
+                refreshOtherControls({ focus: true });
+              } else {
+                clearOtherAnswer();
+                refreshOtherControls();
+              }
+            } else {
+              refreshOtherControls();
+            }
             updateNextState();
           });
         });
+
+        if (otherTextarea) {
+          otherTextarea.addEventListener('input', (event) => {
+            saveAnswer(index, { low_quality_other_text: event.target.value });
+            refreshOtherControls();
+            updateNextState();
+          });
+        }
 
         backBtn.addEventListener('click', () => {
           if (index === 0) {
@@ -1885,7 +2090,9 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
         const qualityAnswered = typeof answer.quality === 'number' && answer.quality >= 1 && answer.quality <= 5;
         const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
         const needsReason = qualityAnswered && answer.quality <= 3;
-        const reasonAnswered = !needsReason || reasons.length > 0;
+        const otherText = normalizeLowQualityOtherText(answer.low_quality_other_text);
+        const otherSelected = reasons.includes(LOW_QUALITY_OTHER_VALUE);
+        const reasonAnswered = !needsReason || (reasons.length > 0 && (!otherSelected || otherText.length > 0));
         return qualityAnswered && reasonAnswered;
       }
 
@@ -1982,6 +2189,18 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
             delete current.low_quality_reasons;
           }
         }
+        if (Object.prototype.hasOwnProperty.call(partial, 'low_quality_other_text')) {
+          const normalizedText = normalizeLowQualityOtherText(partial.low_quality_other_text);
+          const existingText = typeof current.low_quality_other_text === 'string' ? current.low_quality_other_text : '';
+          if (normalizedText !== existingText) {
+            changed = true;
+          }
+          if (normalizedText) {
+            current.low_quality_other_text = normalizedText;
+          } else {
+            delete current.low_quality_other_text;
+          }
+        }
         if (changed) {
           if (current.submissionId && dataAdapter) {
             dataAdapter.discard(current.submissionId);
@@ -1998,6 +2217,7 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
         const submissionId = makeSubmissionId(state.uid, videoId, answer);
         const timestamp = new Date().toISOString();
         const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
+        const otherText = normalizeLowQualityOtherText(answer.low_quality_other_text);
         const entry = getPlaylistEntry(index);
         const record = {
           user_code: state.uid,
@@ -2008,6 +2228,9 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
           user_agent: navigator.userAgent,
           submission_id: submissionId
         };
+        if (otherText) {
+          record.low_quality_other_text = otherText;
+        }
         if (entry) {
           record.section_id = entry.section.id;
           record.section_title = entry.section.title;
@@ -2163,7 +2386,8 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
 
       function makeSubmissionId(uid, videoId, answer) {
         const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
-        const payload = `${uid}::${videoId}::${answer.quality}::${reasons.join('|')}`;
+        const otherText = normalizeLowQualityOtherText(answer.low_quality_other_text);
+        const payload = `${uid}::${videoId}::${answer.quality}::${reasons.join('|')}::${otherText}`;
         const hash = hashString(payload);
         return `${uid}-${videoId}-${hash}`;
       }
