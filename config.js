@@ -9,31 +9,30 @@ window.CONFIG = {
         {
           title: 'Squadra Antimafia',
           videos: [
-            'A1_SQUADRA_ANTIMAFIA.mp4',
-            'A1_SQUADRA_ANTIMAFIA.mp4',
-            'A1_SQUADRA_ANTIMAFIA.mp4',
-            'A1_SQUADRA_ANTIMAFIA.mp4',
-            'A1_SQUADRA_ANTIMAFIA.mp4'
+            'A1_SQUADRA_ANTIMAFIA_EN_ElevenLabs_2025-09-15.mp4',
+            'A1_SQUADRA_ANTIMAFIA_EN-US_VOISEED.mp4',
+            'A1_SQUADRA_ANTIMAFIA-EN_TRANSLATED.mp4',
+            'A1_SQUADRA_ANTIMAFIA-en-US_DEEPDUB.mp4'
           ]
         },
         {
           title: 'Chicago Fire',
           videos: [
-            'A3_CHICAGO_FIRE.mp4',
-            'A3_CHICAGO_FIRE.mp4',
-            'A3_CHICAGO_FIRE.mp4',
-            'A3_CHICAGO_FIRE.mp4',
-            'A3_CHICAGO_FIRE.mp4'
+            'A3_CHICAGO FIRE (V2)_IT_ElevenLabs_2025-09-12.mp4',
+            'A3_CHICAGO_FIRE_IT-IT_VOISEED.mp4',
+            'A3_CHICAGO_FIRE-IT_TRANSLATED.mp4',
+            'ChicagoFire_DoppiaggioUmano.mp4',
+            'IT_A3_CHICAGO_FIRE_Panjaya_DUB.mp4'
           ]
         },
         {
           title: 'Yargi',
           videos: [
-            'A3_CHICAGO_FIRE.mp4',
-            'A3_CHICAGO_FIRE.mp4',
-            'A3_CHICAGO_FIRE.mp4',
-            'A3_CHICAGO_FIRE.mp4',
-            'A3_CHICAGO_FIRE.mp4'
+            'A2_Yargi_IT_ElevenLabs_2025-09-25.mp4',
+            'A2_YARGI_IT-IT_VOISEED.mp4',
+            'A2_YARGI-IT_TRANSLATED.mp4',
+            'SegretiDiFamiglia_DoppiaggioUmano.mp4',
+            'IT_A2_YARGI_Panjaya_DUB.mp4'
           ]
         }
       ]
@@ -44,21 +43,19 @@ window.CONFIG = {
         {
           title: 'Viaggio nella Grande Bellezza',
           videos: [
-            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA.mp4',
-            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA.mp4',
-            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA.mp4',
-            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA.mp4',
-            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA.mp4'
+            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA_EN_ElevenLabs_2025-09-15.mp4',
+            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA_EN-US_VOISEED.mp4',
+            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA-EN_TRANSLATED.mp4',
           ]
         },
         {
           title: 'Liquid Universe',
           videos: [
-            'B2_LIQUID_UNIVERSE.mp4',
-            'B2_LIQUID_UNIVERSE.mp4',
-            'B2_LIQUID_UNIVERSE.mp4',
-            'B2_LIQUID_UNIVERSE.mp4',
-            'B2_LIQUID_UNIVERSE.mp4'
+            'IT_B2_LIQUID_UNIVERSE_Panjaya_DUB.mp4',
+            'B2_LIQUID_UNIVERSE_IT_ElevenLabs_2025-06-20.mp4',
+            'LiquidUniverse_DoppiaggioUmano.mp4'
+            'B2_Liquid_Universe_IT-IT_VOISEED.mp4',
+            'B2_LIQUID_UNIVERSE-IT_TRANSLATED.mp4',
           ]
         }
       ]
@@ -69,23 +66,11 @@ window.CONFIG = {
         {
           title: 'La Casa Fuerte',
           videos: [
-            'C2_LA_CASA_FUERTE.mp4',
-            'C2_LA_CASA_FUERTE.mp4',
-            'C2_LA_CASA_FUERTE.mp4',
-            'C2_LA_CASA_FUERTE.mp4',
-            'C2_LA_CASA_FUERTE.mp4'
+            'C2_LA_CASA_FUERTE_EN-US_VOISEED.mp4',
+            'C2 LA CASA FUERTE_EN_ElevenLabs_2025-09-25.mp4',
+            'C2_LA_CASA_FUERTE_IT-IT_VOISEED.mp4'
           ]
         },
-        {
-          title: 'Talent in Primo Piano',
-          videos: [
-            'B2_LIQUID_UNIVERSE.mp4',
-            'B2_LIQUID_UNIVERSE.mp4',
-            'B2_LIQUID_UNIVERSE.mp4',
-            'B2_LIQUID_UNIVERSE.mp4',
-            'B2_LIQUID_UNIVERSE.mp4'
-          ]
-        }
       ]
     }
   ]
