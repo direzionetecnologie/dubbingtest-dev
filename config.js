@@ -4,7 +4,7 @@ window.CONFIG = {
   VIDEO_BASE_URL: 'https://aiworkshopmediaset.s3.eu-west-1.amazonaws.com/video/',
   sections: [
     {
-      title: 'Clip estere tradotte in italiano',
+      title: 'Clip estere doppiate in italiano',
       contents: [
         {
           title: 'Liquid Universe',
@@ -42,7 +42,7 @@ window.CONFIG = {
       ]
     },
     {
-      title: 'Da italiano a inglese',
+      title: 'Clip italiane doppiate in inglese',
       contents: [
         {
           title: 'Viaggio nella Grande Bellezza',
