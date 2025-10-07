@@ -1774,18 +1774,18 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
                 </fieldset>
                 <fieldset class="followup-fieldset" data-role="low-quality-reason" ${showLowQualityQuestion ? '' : 'hidden'}>
                   <legend>Quali aspetti pensi si possano migliorare?</legend>
-                  <p class="fieldset-note">Puoi selezionare pi&ugrave; elementi.</p>
+                  <p class="fieldset-note">Puoi selezionare un solo elemento.</p>
                   <div class="improvement-options">
                     ${LOW_QUALITY_REASONS.map((option) => {
                       if (option.type === 'other') {
-                        const checkboxId = `low-quality-${option.value}-${index + 1}`;
+                        const optionId = `low-quality-${option.value}-${index + 1}`;
                         const textareaId = `low-quality-other-text-${index + 1}`;
                         const helperId = `low-quality-other-helper-${index + 1}`;
                         return `
                           <div class="option option-other${isOtherSelected ? ' is-active' : ''}" data-role="low-quality-other-container">
                             <div class="option-header">
-                              <input type="checkbox" id="${escapeAttribute(checkboxId)}" name="low-quality-reasons" value="${escapeAttribute(option.value)}" ${isOtherSelected ? 'checked' : ''}>
-                              <label for="${escapeAttribute(checkboxId)}">${escapeHtml(option.label)}</label>
+                              <input type="radio" id="${escapeAttribute(optionId)}" name="low-quality-reasons" value="${escapeAttribute(option.value)}" ${isOtherSelected ? 'checked' : ''}>
+                              <label for="${escapeAttribute(optionId)}">${escapeHtml(option.label)}</label>
                             </div>
                             <textarea
                               id="${escapeAttribute(textareaId)}"
@@ -1805,7 +1805,7 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
                       }
                       return `
                         <label class="option">
-                          <input type="checkbox" name="low-quality-reasons" value="${escapeAttribute(option.value)}" ${lowQualityReasons.includes(option.value) ? 'checked' : ''}>
+                          <input type="radio" name="low-quality-reasons" value="${escapeAttribute(option.value)}" ${lowQualityReasons.includes(option.value) ? 'checked' : ''}>
                           <span>${escapeHtml(option.label)}</span>
                         </label>
                       `;
@@ -1904,7 +1904,7 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
         const qualityInputs = Array.from(form.querySelectorAll('input[name="quality"]'));
         const reasonFieldset = form.querySelector('[data-role="low-quality-reason"]');
         const reasonInputs = Array.from(form.querySelectorAll('input[name="low-quality-reasons"]'));
-        const otherCheckbox = form.querySelector(`input[name="low-quality-reasons"][value="${LOW_QUALITY_OTHER_VALUE}"]`);
+        const otherOptionInput = form.querySelector(`input[name="low-quality-reasons"][value="${LOW_QUALITY_OTHER_VALUE}"]`);
         const otherTextarea = form.querySelector('[data-role="low-quality-other-text"]');
         const otherContainer = form.querySelector('[data-role="low-quality-other-container"]');
 
@@ -1964,7 +1964,7 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
             return;
           }
           const fieldsetVisible = reasonFieldset ? !reasonFieldset.hidden : true;
-          const isChecked = Boolean(fieldsetVisible && otherCheckbox && otherCheckbox.checked);
+          const isChecked = Boolean(fieldsetVisible && otherOptionInput && otherOptionInput.checked);
           otherTextarea.disabled = !isChecked;
           otherTextarea.required = isChecked;
           otherTextarea.setAttribute('aria-required', isChecked ? 'true' : 'false');
@@ -1998,8 +1998,8 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
           if (storedText) {
             saveAnswer(index, { low_quality_other_text: '' });
           }
-          if (otherCheckbox) {
-            otherCheckbox.checked = false;
+          if (otherOptionInput) {
+            otherOptionInput.checked = false;
           }
           if (otherContainer) {
             otherContainer.classList.remove('is-active');
@@ -2025,14 +2025,11 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
               .filter((item) => item.checked)
               .map((item) => item.value);
             saveAnswer(index, { low_quality_reasons: selected });
-            if (event.target.value === LOW_QUALITY_OTHER_VALUE) {
-              if (event.target.checked) {
-                refreshOtherControls({ focus: true });
-              } else {
-                clearOtherAnswer();
-                refreshOtherControls();
-              }
+            const otherSelected = selected.includes(LOW_QUALITY_OTHER_VALUE);
+            if (otherSelected) {
+              refreshOtherControls({ focus: event.target.value === LOW_QUALITY_OTHER_VALUE });
             } else {
+              clearOtherAnswer();
               refreshOtherControls();
             }
             updateNextState();
